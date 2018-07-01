@@ -8,6 +8,7 @@ sourceSets {
   main {
     kotlin {
       srcDirs = ['.']
+      filter.includes = []
       filter.include('FooBar.kt')
     }
   }

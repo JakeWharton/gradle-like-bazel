@@ -9,6 +9,7 @@ sourceSets {
   main {
     kotlin {
       srcDirs = ['.']
+      filter.includes = []
       filter.include('FooBar_JVM.kt')
     }
   }
