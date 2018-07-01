@@ -1,0 +1,15 @@
+apply plugin: 'org.jetbrains.kotlin.platform.jvm'
+
+dependencies {
+  expectedBy project(':com_example_foo_bar@kt_common')
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.50'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['.']
+      filter.include('FooBar_JVM.kt')
+    }
+  }
+}

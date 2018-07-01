@@ -1,0 +1,17 @@
+def rootPath = rootProject.projectDir.toPath()
+
+fileTree('src')
+  .filter { it.isFile() && it.name.endsWith('.gradle') }
+  .files
+  .forEach {
+    def targetName = it.name[0..-8]
+    def moduleDir = it.parentFile
+    def relativePath = rootPath.relativize(moduleDir.toPath()).toString()
+    def moduleName = ':' + relativePath.substring(4).replace(File.separator, '_') + '@' + targetName
+    
+    include(moduleName)
+
+    def project = project(moduleName)
+    project.projectDir = moduleDir
+    project.buildFileName = it.name
+  }

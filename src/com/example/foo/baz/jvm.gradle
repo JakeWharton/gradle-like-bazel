@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.example.foo.baz.Main'
+
+dependencies {
+  implementation project(':com_example_foo_bar@kt_jvm')
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['.']
+      filter.include('Main.java')
+    }
+  }
+}

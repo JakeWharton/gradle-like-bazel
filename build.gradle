@@ -1,0 +1,23 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.50"
+  }
+}
+
+def packageRootPath = new File(rootProject.projectDir, 'src').toPath()
+
+subprojects { project ->
+  def relativePath = packageRootPath.relativize(project.projectDir.toPath()).toString()
+  project.buildDir = new File(new File(rootProject.buildDir, relativePath), project.buildFile.name[0..-8])
+
+  repositories {
+    mavenCentral()
+  }
+}
+
+task clean(type: Delete) {
+  delete(rootProject.buildDir)
+}

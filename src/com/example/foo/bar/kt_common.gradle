@@ -1,0 +1,14 @@
+apply plugin: 'org.jetbrains.kotlin.platform.common'
+
+dependencies {
+  compile 'org.jetbrains.kotlin:kotlin-stdlib-common:1.2.50'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['.']
+      filter.include('FooBar.kt')
+    }
+  }
+}
