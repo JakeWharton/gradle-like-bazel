@@ -18,6 +18,21 @@ subprojects { project ->
   }
 }
 
+def target(String query) {
+  if (!query.startsWith('//')) {
+    throw new IllegalArgumentException("Only absolute target queries are currently allowed (e.g., //foo/bar:baz)")
+  }
+  int colon = query.indexOf(':')
+  if (colon == -1 || query.indexOf(':', colon + 1) != -1) {
+    throw new IllegalArgumentException("Target query must contain a single target name separated by a colon (e.g., //foo/bar:baz)")
+  }
+  String packageQuery = query.substring(2, colon)
+  String targetQuery = query.substring(colon + 1)
+
+  String projectName = packageQuery.replace('/', '_') + '@' + targetQuery
+  return project(projectName)
+}
+
 task clean(type: Delete) {
   delete(rootProject.buildDir)
 }
